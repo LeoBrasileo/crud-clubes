@@ -3,10 +3,18 @@
 <tr>
   <th scope="row">{{item.id}}</th> <!-- Aca va a estar el escudo \-->
   <td>{{item.name}}</td>
-  <td>{{item.pais}}</td>
+  <td>{{item.country}}</td>
   <td>
-    <button type="button" class="btn btn-outline-secondary">Ver</button>
-    <button type="button" class="btn btn-outline-secondary">Editar</button>
+    <form method="POST" action="/view">
+    <input type="text" name="user[id]" value="{{item.id}}" hidden>
+    <input class="btn btn-outline-secondary" type="submit" value="Ver">
+    </form>
+
+    <form method="POST" action="/edit">
+    <input type="text" name="user[id]" value="{{item.id}}" hidden>
+    <input class="btn btn-outline-secondary" type="submit" value="Editar">
+    </form>
+
     <button type="button" class="btn btn-outline-secondary">Eliminar</button>
   </td>
 </tr>

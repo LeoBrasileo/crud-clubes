@@ -13,9 +13,12 @@ const upload = multer({ dest: './uploads/imagenes' });
 const exphbs = require('express-handlebars');
 
 class ObjEquipo {
-    
-  constructor (name) {
+  constructor (name, id, country, web, year) {
       this.name = name;
+      this.id = id;
+      this.country = country;
+      this.web = web;
+      this.year = year;
   }
 }
 
@@ -31,19 +34,21 @@ app.set('view engine', 'handlebars');
 // notar que no hace falta ir a localhost:8080/uploads
 // https://expressjs.com/en/starter/static-files.html
 app.use(express.static(`${__dirname}/uploads`));
+app.use(express.urlencoded());
+app.use(express.json());
 
 const nombre = 'Leonel';
+let equipoActual = "";
 const equipos = []; // todos los equipos van a estar en este arrays de objEquipo
-equipos[0] = new ObjEquipo("nombre generico");
-equipos[0].pais = "inglaterra"
-equipos[1] = new ObjEquipo("nombre 2")
+equipos[0] = new ObjEquipo("Arsenal FC","0","England","http://www.arsenal.com",1886);
+equipos[1] = new ObjEquipo("Aston Villa FC","1","England","http://www.avfc.co.uk",1872);
 
 app.get('/', (req, res) => { //vista principal, tabla inicial
   res.render('inicio', {
     layout: 'base',
     data: {
       nombre_equipo : equipos[0].name,
-      pais_eq : equipos[0].pais,
+      pais : equipos[0].country,
       filas : equipos.length,
       equipos,
     },
@@ -54,8 +59,44 @@ app.get('/add', (req, res) => {
   res.render('agregar_equipo', {
     layout : 'base',
     data : {
-      
+
     },
+  });
+});
+
+app.post('/edit', function(request, response){
+  response.redirect(`edit/${request.body.user.id}`)
+  equipoActual = request.body.user.id;
+  //console.log(equipoActual);
+  app.get(`/edit/${equipoActual}`, (req, res) => {
+    equipoNum = parseInt(equipoActual);
+    res.render('edit_equipo', {
+      layout : 'base',
+      data : {
+        nombre_equipo : equipos[equipoNum].name,
+        ano_equipo : equipos[equipoNum].year,
+        pais : equipos[equipoNum].country,
+        web : equipos[equipoNum].web,
+      },
+    });
+  });
+});
+
+app.post('/view', function(request, response){
+  response.redirect(`view/${request.body.user.id}`)
+  equipoActual = request.body.user.id;
+  //console.log(equipoActual);
+  app.get(`/view/${equipoActual}`, (req, res) => {
+    equipoNum = parseInt(equipoActual);
+    res.render('ver_equipo', {
+      layout : 'base',
+      data : {
+        nombre_equipo : equipos[equipoNum].name,
+        ano_equipo : equipos[equipoNum].year,
+        pais : equipos[equipoNum].country,
+        web : equipos[equipoNum].web,
+      },
+    });
   });
 });
 
@@ -82,6 +123,10 @@ app.get('/equipos', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.send(equipos);
 });
+
+function setPos (num) {
+  return num;
+}
 
 app.listen(PUERTO);
 console.log(`Escuchando en http://localhost:${PUERTO}`);

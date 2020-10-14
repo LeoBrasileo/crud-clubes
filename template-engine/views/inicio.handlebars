@@ -1,5 +1,6 @@
 <h1>En esta vista va a estar toda la tabla principal</h1>
 
+<span>  Hay {{data.filas}} equipos</span>
 <button type="button" class="btn btn-primary" onclick="window.location.href='/add'">Agregar</button>
 
 <table class="table">
@@ -12,12 +13,6 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>{{data.nombre_equipo}}</td>
-      <td>{{data.pais_eq}}</td>
-      <td>{{data.filas}}</td>
-    </tr>
     {{>navegacion items=data.equipos}}
     </tr>
   </tbody>

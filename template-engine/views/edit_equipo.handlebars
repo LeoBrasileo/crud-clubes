@@ -1,4 +1,4 @@
-<h1>Agregar equipo</h1>
+<h1>Editar Equipo</h1>
 
 <label></label>
 <div class="container">
@@ -8,7 +8,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-lg">Nombre del club</span>
                 </div>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                <input type="text" value="{{data.nombre_equipo}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
             </div>
         </div>
         <div class="col-sm">
@@ -16,7 +16,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-lg">Año de fundacion</span>
                 </div>
-                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                <input type="number" value="{{data.ano_equipo}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-lg">País</span>
                 </div>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                <input type="text" value="{{data.pais}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
             </div>
         </div>
         <div class="col-sm">
@@ -35,7 +35,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-lg">Sitio Web</span>
                 </div>
-                <input type="url" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                <input type="url" value="{{data.web}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
             </div>
         </div>
     </div>
