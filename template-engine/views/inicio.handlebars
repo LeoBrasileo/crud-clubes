@@ -1,0 +1,24 @@
+<h1>En esta vista va a estar toda la tabla principal</h1>
+
+<button type="button" class="btn btn-primary" onclick="window.location.href='/add'">Agregar</button>
+
+<table class="table">
+  <thead>
+    <tr>
+        <th scope="row">#</th>
+      <th scope="col">Equipo</th>
+      <th scope="col">País</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>{{data.nombre_equipo}}</td>
+      <td>{{data.pais_eq}}</td>
+      <td>{{data.filas}}</td>
+    </tr>
+    {{>navegacion items=data.equipos}}
+    </tr>
+  </tbody>
+</table>

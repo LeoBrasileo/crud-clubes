@@ -1,0 +1,14 @@
+<ul>
+{{#each items as |item|}}
+<tr>
+  <th scope="row">{{item.id}}</th> <!-- Aca va a estar el escudo \-->
+  <td>{{item.name}}</td>
+  <td>{{item.pais}}</td>
+  <td>
+    <button type="button" class="btn btn-outline-secondary">Ver</button>
+    <button type="button" class="btn btn-outline-secondary">Editar</button>
+    <button type="button" class="btn btn-outline-secondary">Eliminar</button>
+  </td>
+</tr>
+{{/each}}
+</ul>
