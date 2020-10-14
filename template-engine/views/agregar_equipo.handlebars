@@ -8,7 +8,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-lg">Nombre del club</span>
                 </div>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                <input type="text" id="inp_name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
             </div>
         </div>
         <div class="col-sm">
@@ -52,14 +52,20 @@
     </div>
     <div class="row">
         <div class="col-sm">
-            <label>previzualizacion del escudo:</label>
+            <label class="alert">previzualizacion del escudo:</label>
+            {{#if data.mensaje}}
+            <img src="/imagenes/{{data.nombreArchivo}}" width="27%"/>
+            {{/if}}
         </div>
     </div>
     <label></label>
     <div class="row">
         <div class="col-sm-5"></div>
         <div class="col-sm">
-            <button type="button" class="btn btn-primary">Enviar Todo   </button>
+            <form action="/add" method="POST">
+                <input type="text" name="user[id]" value="{{data.idCreado}}" hidden>
+                <input type="submit" class="btn btn-primary" value="Enviar todo"/>
+            </form>
         </div>
     </div>
 </div>

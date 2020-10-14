@@ -13,12 +13,13 @@ const upload = multer({ dest: './uploads/imagenes' });
 const exphbs = require('express-handlebars');
 
 class ObjEquipo {
-  constructor (name, id, country, web, year) {
+  constructor (name, id, country, web, year, img) {
       this.name = name;
       this.id = id;
       this.country = country;
       this.web = web;
       this.year = year;
+      this.img = img;
   }
 }
 
@@ -40,15 +41,14 @@ app.use(express.json());
 const nombre = 'Leonel';
 let equipoActual = "";
 const equipos = []; // todos los equipos van a estar en este arrays de objEquipo
-equipos[0] = new ObjEquipo("Arsenal FC","0","England","http://www.arsenal.com",1886);
-equipos[1] = new ObjEquipo("Aston Villa FC","1","England","http://www.avfc.co.uk",1872);
+equipos[0] = new ObjEquipo("Arsenal FC","0","England","http://www.arsenal.com",1886,'d3daf5e9d1ee1476302e5a42e5a0fde7');
+equipos[1] = new ObjEquipo("Aston Villa FC","1","England","http://www.avfc.co.uk",1872,'fc4500f75e1188d8f6742294b11971d2');
+equipos[2] = new ObjEquipo("Ferro Carril Oeste","2","Argentina","https://www.ferrocarriloeste.org.ar/",1904,'66adc7f9837fb19eafb23157c15a50c4');
 
 app.get('/', (req, res) => { //vista principal, tabla inicial
   res.render('inicio', {
     layout: 'base',
     data: {
-      nombre_equipo : equipos[0].name,
-      pais : equipos[0].country,
       filas : equipos.length,
       equipos,
     },
@@ -59,14 +59,25 @@ app.get('/add', (req, res) => {
   res.render('agregar_equipo', {
     layout : 'base',
     data : {
-
+      idCreado : equipos.length+1,
     },
   });
 });
 
-app.post('/edit', function(request, response){
-  response.redirect(`edit/${request.body.user.id}`)
-  equipoActual = request.body.user.id;
+app.post('/add', upload.single('escudo'), (req, res) => {
+  console.log(req.file);
+  res.render('agregar_equipo', {
+    layout: 'base',
+    data: {
+      mensaje: 'Éxito!',
+      nombreArchivo: req.file.filename,
+    },
+  });
+});
+
+app.post('/edit', function(req, res){
+  res.redirect(`edit/${req.body.user.id}`)
+  equipoActual = req.body.user.id;
   //console.log(equipoActual);
   app.get(`/edit/${equipoActual}`, (req, res) => {
     equipoNum = parseInt(equipoActual);
@@ -82,9 +93,9 @@ app.post('/edit', function(request, response){
   });
 });
 
-app.post('/view', function(request, response){
-  response.redirect(`view/${request.body.user.id}`)
-  equipoActual = request.body.user.id;
+app.post('/view', function(req, res){
+  res.redirect(`view/${req.body.user.id}`)
+  equipoActual = req.body.user.id;
   //console.log(equipoActual);
   app.get(`/view/${equipoActual}`, (req, res) => {
     equipoNum = parseInt(equipoActual);
@@ -95,10 +106,29 @@ app.post('/view', function(request, response){
         ano_equipo : equipos[equipoNum].year,
         pais : equipos[equipoNum].country,
         web : equipos[equipoNum].web,
+        img : equipos[equipoNum].img,
       },
     });
   });
 });
+
+app.post('/delete', function(req, res){
+  equipoActual = req.body.user.id;
+  console.log(equipoActual);
+  equipoNum = parseInt(equipoActual);
+  removeItemFromArr(equipos,equipos[equipoNum]);
+  for (i = equipoNum; i<equipos.length; i++) {
+    equipos[i].id = (i).toString(); 
+  }
+  res.redirect('/');
+});
+
+function removeItemFromArr ( arr, item ) {
+  var i = arr.indexOf( item );
+  if ( i !== -1 ) {
+      arr.splice( i, 1 );
+  }
+}
 
 app.get('/form', (req, res) => {
   console.log(req.files);
@@ -123,10 +153,6 @@ app.get('/equipos', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.send(equipos);
 });
-
-function setPos (num) {
-  return num;
-}
 
 app.listen(PUERTO);
 console.log(`Escuchando en http://localhost:${PUERTO}`);

@@ -1,7 +1,7 @@
 <ul>
 {{#each items as |item|}}
 <tr>
-  <th scope="row">{{item.id}}</th> <!-- Aca va a estar el escudo \-->
+  <td><img src="/imagenes/{{item.img}}" width="100px" height="135px"></td> <!-- Aca va a estar el escudo \-->
   <td>{{item.name}}</td>
   <td>{{item.country}}</td>
   <td>
@@ -15,7 +15,10 @@
     <input class="btn btn-outline-secondary" type="submit" value="Editar">
     </form>
 
-    <button type="button" class="btn btn-outline-secondary">Eliminar</button>
+    <form method="POST" action="/delete">
+    <input type="text" name="user[id]" value="{{item.id}}" hidden>
+    <input class="btn btn-outline-secondary" type="submit" value="Eliminar">
+    </form>
   </td>
 </tr>
 {{/each}}

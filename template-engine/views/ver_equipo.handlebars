@@ -1,1 +1,46 @@
-<h1>Aca va a haber una tabla con todos los valores y datos del equipo seleccionado</h1>
+<h1>Datos de {{data.nombre_equipo}}</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm">
+            <img src="/imagenes/{{data.img}}" width="50%" alt="">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-lg">Nombre del club</span>
+                </div>
+                <input type="text" readonly value="{{data.nombre_equipo}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-lg">Año de fundacion</span>
+                </div>
+                <input type="number" readonly value="{{data.ano_equipo}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            </div>
+        </div>
+    </div>
+    <label></label>
+    <div class="row">
+        <div class="col-sm">
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-lg">País</span>
+                </div>
+                <input type="text" readonly value="{{data.pais}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-lg">Sitio Web</span>
+                </div>
+                <input type="url" readonly value="{{data.web}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            </div>
+        </div>
+    </div>
+</div>
