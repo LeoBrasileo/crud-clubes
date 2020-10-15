@@ -40,10 +40,10 @@ app.use(express.json());
 
 const nombre = 'Leonel';
 let equipoActual = "";
-const equipos = []; // todos los equipos van a estar en este arrays de objEquipo
-equipos[0] = new ObjEquipo("Arsenal FC","0","England","http://www.arsenal.com",1886,'d3daf5e9d1ee1476302e5a42e5a0fde7');
-equipos[1] = new ObjEquipo("Aston Villa FC","1","England","http://www.avfc.co.uk",1872,'fc4500f75e1188d8f6742294b11971d2');
-equipos[2] = new ObjEquipo("Ferro Carril Oeste","2","Argentina","https://www.ferrocarriloeste.org.ar/",1904,'66adc7f9837fb19eafb23157c15a50c4');
+//JSON.parse()
+//JSON.stringiy()
+//const equipos = []; // todos los equipos van a estar en este arrays de objEquipo
+const equipos = JSON.parse(fs.readFileSync('./data/mis_equipos.json'));
 
 app.get('/', (req, res) => { //vista principal, tabla inicial
   res.render('inicio', {
@@ -59,12 +59,12 @@ app.get('/add', (req, res) => {
   res.render('agregar_equipo', {
     layout : 'base',
     data : {
-      idCreado : equipos.length+1,
+      idCreado : equipos.length,
     },
   });
 });
 
-app.post('/add', upload.single('escudo'), (req, res) => {
+app.post('/add/img', upload.single('escudo'), (req, res) => {
   console.log(req.file);
   res.render('agregar_equipo', {
     layout: 'base',
@@ -73,6 +73,11 @@ app.post('/add', upload.single('escudo'), (req, res) => {
       nombreArchivo: req.file.filename,
     },
   });
+});
+
+app.post('/add/:id', (req, res) => {
+  //console.log(req.file);
+  res.send(req.params.id);
 });
 
 app.post('/edit', function(req, res){
