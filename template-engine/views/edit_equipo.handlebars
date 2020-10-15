@@ -2,64 +2,64 @@
 
 <label></label>
 <div class="container">
-    <div class="row">
-        <div class="col-sm">
-            <div class="input-group input-group-lg">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-lg">Nombre del club</span>
+    <form method="POST" action="/edit/{{data.id}}">
+        <div class="row">
+            <div class="col-sm">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-lg">Nombre del club</span>
+                    </div>
+                    <input type="text" id="user[name]" name="user[name]" value="{{data.nombre_equipo}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
                 </div>
-                <input type="text" value="{{data.nombre_equipo}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            </div>
+            <div class="col-sm">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-lg">Año de fundacion</span>
+                    </div>
+                    <input type="number" id="year" name="year" value="{{data.ano_equipo}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                </div>
             </div>
         </div>
-        <div class="col-sm">
-            <div class="input-group input-group-lg">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-lg">Año de fundacion</span>
+        <label></label>
+        <div class="row">
+            <div class="col-sm">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-lg">País</span>
+                    </div>
+                    <input type="text id="country" name="country"" value="{{data.pais}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
                 </div>
-                <input type="number" value="{{data.ano_equipo}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            </div>
+            <div class="col-sm">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-lg">Sitio Web</span>
+                    </div>
+                    <input type="url" id="web" name="web" value="{{data.web}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                </div>
             </div>
         </div>
-    </div>
-    <label></label>
-    <div class="row">
-        <div class="col-sm">
-            <div class="input-group input-group-lg">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-lg">País</span>
-                </div>
-                <input type="text" value="{{data.pais}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-            </div>
-        </div>
-        <div class="col-sm">
-            <div class="input-group input-group-lg">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-lg">Sitio Web</span>
-                </div>
-                <input type="url" value="{{data.web}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-            </div>
-        </div>
-    </div>
-    <label></label>
-    <div class="row">
-        <div class="col-sm">
-            <li>Cambiar imagen del escudo (opcional)</li>
-            <form action="/add" method="POST" enctype="multipart/form-data">
+        <label></label>
+        <!--<div class="row">
+            <div class="col-sm">
+                <li>Cambiar imagen del escudo (opcional)</li>
                 <label for="imagen">Imagen: </label>
-                <input type="file"  name="escudo" id="escudo">
-                <input type="submit" value="Subir" />
-            </form>
+                <input type="file" name="escudo" id="escudo">
+            </div>
+        </div> Aca va a estar el escudo \-->
+        <div class="row">
+            <div class="col-sm">
+                <label>previzualizacion del escudo:</label>
+                <img src="/imagenes/{{data.img}}" width="18%" alt="">
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm">
-            <label>previzualizacion del escudo:</label>
+        <label></label>
+        <div class="row">
+            <div class="col-sm-5"></div>
+            <div class="col-sm">
+                <input type="submit" class="btn btn-primary" value="Editar"></input>
+            </div>
         </div>
-    </div>
-    <label></label>
-    <div class="row">
-        <div class="col-sm-5"></div>
-        <div class="col-sm">
-            <button type="button" class="btn btn-primary">Enviar Todo   </button>
-        </div>
-    </div>
+    </form>
 </div>

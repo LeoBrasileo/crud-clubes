@@ -64,21 +64,18 @@ app.get('/add', (req, res) => {
   });
 });
 
-/*app.post('/add', upload.single('escudo'), (req, res) => {
-  console.log(req.file);
-  res.render('agregar_equipo', {
-    layout: 'base',
-    data: {
-      mensaje: 'Éxito!',
-      nombreArchivo: req.file.filename,
-    },
-  });
-});*/
-
 app.post('/add', upload.single('escudo'), function(req, res){
   console.log(req.body.user.id);
+  let img = '';
+  if(req.file.filename) {
+    img = req.file.filename
+  } else {
+    img = 'ej.png'
+  }
   const eqNew = new ObjEquipo(req.body.user.name,req.body.user.id,req.body.country,req.body.web,req.body.year,req.file.filename);
   equipos.push(eqNew);
+  //Guardar cambios
+  fs.writeFileSync('./data/mis_equipos.json',JSON.stringify(equipos));
   res.redirect('/');
 });
 
@@ -95,7 +92,20 @@ app.post('/edit', function(req, res){
         ano_equipo : equipos[equipoNum].year,
         pais : equipos[equipoNum].country,
         web : equipos[equipoNum].web,
+        img : equipos[equipoNum].img,
+        id : equipos[equipoNum].id,
       },
+    });
+    app.post(`/edit/${equipoActual}`, upload.single('escudo'), function(req, res){
+      equipos[equipoActual].name = req.body.user.name;
+      equipos[equipoActual].country = req.body.country;
+      equipos[equipoActual].country = req.body.country;
+      equipos[equipoActual].web = req.body.web;
+      equipos[equipoActual].year = req.body.year;
+      //equipos[equipoActual].img = req.file.filename;
+      //Guardar cambios
+      fs.writeFileSync('./data/mis_equipos.json',JSON.stringify(equipos));
+      res.redirect('/');
     });
   });
 });
@@ -127,6 +137,7 @@ app.post('/delete', function(req, res){
   for (i = equipoNum; i<equipos.length; i++) {
     equipos[i].id = (i).toString(); 
   }
+  fs.writeFileSync('./data/mis_equipos.json',JSON.stringify(equipos));
   res.redirect('/');
 });
 
@@ -136,13 +147,6 @@ function removeItemFromArr ( arr, item ) {
       arr.splice( i, 1 );
   }
 }
-
-app.get('/form', (req, res) => {
-  console.log(req.files);
-  res.render('form', {
-    layout: 'ejemplo',
-  });
-});
 
 app.listen(PUERTO);
 console.log(`Escuchando en http://localhost:${PUERTO}`);
