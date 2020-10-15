@@ -64,7 +64,7 @@ app.get('/add', (req, res) => {
   });
 });
 
-app.post('/add/img', upload.single('escudo'), (req, res) => {
+/*app.post('/add', upload.single('escudo'), (req, res) => {
   console.log(req.file);
   res.render('agregar_equipo', {
     layout: 'base',
@@ -73,11 +73,13 @@ app.post('/add/img', upload.single('escudo'), (req, res) => {
       nombreArchivo: req.file.filename,
     },
   });
-});
+});*/
 
-app.post('/add/:id', (req, res) => {
-  //console.log(req.file);
-  res.send(req.params.id);
+app.post('/add', upload.single('escudo'), function(req, res){
+  console.log(req.body.user.id);
+  const eqNew = new ObjEquipo(req.body.user.name,req.body.user.id,req.body.country,req.body.web,req.body.year,req.file.filename);
+  equipos.push(eqNew);
+  res.redirect('/');
 });
 
 app.post('/edit', function(req, res){
@@ -140,23 +142,6 @@ app.get('/form', (req, res) => {
   res.render('form', {
     layout: 'ejemplo',
   });
-});
-
-app.post('/form', upload.single('imagen'), (req, res) => {
-  console.log(req.file);
-  res.render('form', {
-    layout: 'ejemplo',
-    data: {
-      mensaje: 'Éxito!',
-      nombreArchivo: req.file.filename,
-    },
-  });
-});
-
-app.get('/equipos', (req, res) => {
-  const equipos = fs.readFileSync('./data/equipos.json');
-  res.setHeader('Content-Type', 'application/json');
-  res.send(equipos);
 });
 
 app.listen(PUERTO);

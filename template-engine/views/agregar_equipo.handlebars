@@ -2,71 +2,59 @@
 
 <label></label>
 <div class="container">
-    <div class="row">
-        <div class="col-sm">
-            <div class="input-group input-group-lg">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-lg">Nombre del club</span>
+    <form method="POST" action="/add" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-sm">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-lg">Nombre del club</span>
+                    </div>
+                    <input type="text" id="user[name]" name="user[name]" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
                 </div>
-                <input type="text" id="inp_name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            </div>
+            <div class="col-sm">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-lg">Año de fundacion</span>
+                    </div>
+                    <input type="number" id="year" name="year" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                </div>
             </div>
         </div>
-        <div class="col-sm">
-            <div class="input-group input-group-lg">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-lg">Año de fundacion</span>
+        <label></label>
+        <div class="row">
+            <div class="col-sm">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-lg">País</span>
+                    </div>
+                    <input type="text" id="country" name="country" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
                 </div>
-                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            </div>
+            <div class="col-sm">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-lg">Sitio Web</span>
+                    </div>
+                    <input type="url" id="web" name="web" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                </div>
             </div>
         </div>
-    </div>
-    <label></label>
-    <div class="row">
-        <div class="col-sm">
-            <div class="input-group input-group-lg">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-lg">País</span>
-                </div>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-            </div>
-        </div>
-        <div class="col-sm">
-            <div class="input-group input-group-lg">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-lg">Sitio Web</span>
-                </div>
-                <input type="url" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-            </div>
-        </div>
-    </div>
-    <label></label>
-    <div class="row">
-        <div class="col-sm">
-            <li>Subir imagen del escudo</li>
-            <form action="/add/img" method="POST" enctype="multipart/form-data">
+        <label></label>
+        <div class="row">
+            <div class="col-sm">
+                <li>Subir imagen del escudo</li>
                 <label for="imagen">Imagen: </label>
                 <input type="file"  name="escudo" id="escudo">
-                <input type="submit" value="Subir" />
-            </form>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm">
-            <label class="alert">previzualizacion del escudo:</label>
-            {{#if data.mensaje}}
-            <img src="/imagenes/{{data.nombreArchivo}}" width="27%"/>
-            {{/if}}
-        </div>
-    </div>
-    <label></label>
-    <div class="row">
-        <div class="col-sm-5"></div>
-        <div class="col-sm">
-            <form action="/add/{{data.idCreado}}" method="POST">
+        <label></label>
+        <div class="row">
+            <div class="col-sm-5"></div>
+            <div class="col-sm">
                 <input type="text" name="user[id]" value="{{data.idCreado}}" hidden>
-                <input type="text" name="user[name]" hidden>
                 <input type="submit" class="btn btn-primary" value="Enviar todo"/>
-            </form>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
